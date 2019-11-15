@@ -1,50 +1,23 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+// import PropTypes from 'prop-types'
 import Product from './product/Product'
 import ProductPrice from './product-price/ProductPrice'
 
 import './product-list.css'
 
-class ProductList extends Component {
-
-
-    state = {
-      counter: this.props.counter || 0, 
-      title: "Hello Ecom",
-      value: ''
-    }
-  
- 
-  handleClick = (event) => {
-    this.setState({
-      counter: this.state.counter + 1
-    }) 
-  }
-  handleChange = event => {
-    this.setState({
-      value: event.target.value
-    }) 
-  }
- 
-
-  render(){
-    const { product } = this.props;
-    const { counter, title, value } = this.state;
-
-
-    return (
-      <div className="container">
-        {title}
-        <Product 
-        product={product}
-        Price={ProductPrice}
-        handleClick = {this.handleClick}
-        counter = {counter}/>
-        <input onChange = {this.handleChange} />
-      </div>
-    )
-  }
- 
+const ProductList = (props) => {
+  const { product } = props;
+  const renderedProducts = product.map(prod => {
+    return (<Product
+      product={prod}
+      Price={ProductPrice}
+    />)
+  })
+  return (
+    <div className="container">
+      {renderedProducts}
+    </div>
+  )
 }
 
 ProductList.defaultProps = {
